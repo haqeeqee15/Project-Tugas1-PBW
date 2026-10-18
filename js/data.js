@@ -109,7 +109,7 @@ var dataTracking = {
         keterangan: "Tiba di Hub: TANGERANG SELATAN"
       },      
       {
-        waktu: "2025-08-25 10:12:20",
+        waktu: "2025-08-25 16:30:10",
         keterangan: "Diteruskan ke Kantor Jakarta Selatan"
       },
     ]
@@ -150,8 +150,3 @@ var dataTracking = {
     ]
   }
 };
-
-
-console.log(dataPengguna.length);
-console.log(dataBahanAjar.length);
-console.log(Object.keys(dataTracking));

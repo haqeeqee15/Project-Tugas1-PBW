@@ -146,23 +146,4 @@ document.addEventListener("DOMContentLoaded", function () {
             window.location.replace("index.html");
         });
 
-
-    // =====================================================
-    // 7. MENU YANG BELUM DIIMPLEMENTASIKAN
-    // =====================================================
-
-    document.querySelectorAll("[data-placeholder]")
-        .forEach(function (link) {
-
-            link.addEventListener("click", function (event) {
-                event.preventDefault();
-
-                alert(
-                    "Menu " +
-                    link.dataset.placeholder +
-                    " belum tersedia pada tugas ini."
-                );
-            });
-        });
-
 });

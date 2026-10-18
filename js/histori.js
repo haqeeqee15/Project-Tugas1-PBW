@@ -220,14 +220,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // Jalankan jika ada menu yang masih berupa placeholder.
-    document.querySelectorAll("[data-placeholder]").forEach(function (link) {
-        link.addEventListener("click", function (event) {
-            event.preventDefault();
-            window.alert("Menu ini belum tersedia pada tahap pengembangan.");
-        });
-    });
-
     tampilkanRingkasan();
     tampilkanTabel();
 });
