@@ -30,13 +30,22 @@
         <nav id="mainNav" class="app-navbar-nav" aria-label="Navigasi utama">
             <a href="dashboard.html" class="nav-tab">Dashboard</a>
 
-            <a href="stok.html" class="nav-tab">Informasi</a>
+            <a href="stok.html" class="nav-tab">Informasi Bahan Ajar</a>
 
-            <a href="tracking.html" class="nav-tab">Tracking</a>
+            <a href="tracking.html" class="nav-tab">Tracking Pengiriman</a>
 
-            <a href="rekap.html" class="nav-tab">Rekap</a>
+            <div class="nav-dropdown">
+                <button type="button" class="nav-tab nav-dropdown-toggle" aria-expanded="false" aria-controls="laporanMenu">
+                    Laporan <span class="nav-caret" aria-hidden="true">&#9662;</span>
+                </button>
 
-            <a href="histori.html" class="nav-tab">Histori</a>
+                <div id="laporanMenu" class="nav-dropdown-menu">
+                    <a href="monitoring.html" class="nav-dropdown-item">Monitoring Progress DO Bahan Ajar</a>
+                    <a href="rekap.html" class="nav-dropdown-item">Rekap Bahan Ajar</a>
+                </div>
+            </div>
+
+            <a href="histori.html" class="nav-tab">Histori Transaksi Bahan Ajar</a>
         </nav>
 
         <button type="button" class="theme-toggle" role="switch" aria-checked="false" aria-label="Ganti ke mode gelap">
@@ -51,45 +60,12 @@
         <header class="topbar">
           <div>
             <h1>Tracking Pengiriman</h1>
-            <p>Pantau dan lacak status pengiriman bahan ajar berdasarkan nomor DO.</p>
+            <p>Lacak status pengiriman bahan ajar berdasarkan nomor Delivery Order (DO).</p>
           </div>
           <div id="userInfo" class="user-info"></div>
         </header>
 
         <section class="page-content">
-          <div class="page-header">
-            <div>
-              <h2>Ringkasan Pengiriman</h2>
-              <p>Ringkasan berdasarkan data tracking yang tersedia.</p>
-            </div>
-          </div>
-
-          <div class="monitoring-summary">
-            <article class="monitoring-card">
-              <span class="monitoring-card-icon">▥</span>
-              <div>
-                <p>Total Delivery Order</p>
-                <h3 id="totalDO">0</h3>
-              </div>
-            </article>
-
-            <article class="monitoring-card">
-              <span class="monitoring-card-icon">➜</span>
-              <div>
-                <p>Dalam Perjalanan</p>
-                <h3 id="totalTransit">0</h3>
-              </div>
-            </article>
-
-            <article class="monitoring-card">
-              <span class="monitoring-card-icon">✓</span>
-              <div>
-                <p>Dikirim</p>
-                <h3 id="totalDikirim">0</h3>
-              </div>
-            </article>
-          </div>
-
           <div class="page-header">
             <div>
               <h2>Lacak Pesanan</h2>
@@ -179,51 +155,6 @@
               </div>
 
               <div id="trackingTimeline" class="timeline"></div>
-            </div>
-          </section>
-
-          <section class="content-card">
-            <div class="section-header">
-              <div>
-                <h2>Daftar Delivery Order</h2>
-                <p id="monitoringCount">Memuat data...</p>
-              </div>
-            </div>
-
-            <form id="monitoringSearchForm">
-              <div class="monitoring-search">
-                <input
-                  type="search"
-                  id="searchDO"
-                  placeholder="Cari nomor DO atau nama penerima..."
-                  aria-label="Cari nomor DO atau nama penerima"
-                />
-                <button type="submit" class="btn-primary">Cari</button>
-                <button type="button" id="resetSearch" class="btn-outline">
-                  Reset
-                </button>
-              </div>
-            </form>
-
-            <div class="table-responsive">
-              <table id="monitoringTable">
-                <thead>
-                  <tr>
-                    <th>No.</th>
-                    <th>Nomor DO</th>
-                    <th>Nama Penerima</th>
-                    <th>Ekspedisi</th>
-                    <th>Tanggal Kirim</th>
-                    <th>Status</th>
-                    <th>Aksi</th>
-                  </tr>
-                </thead>
-                <tbody id="monitoringTableBody">
-                  <tr>
-                    <td colspan="7">Memuat data...</td>
-                  </tr>
-                </tbody>
-              </table>
             </div>
           </section>
         </section>

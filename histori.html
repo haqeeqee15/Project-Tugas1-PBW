@@ -30,13 +30,22 @@
         <nav id="mainNav" class="app-navbar-nav" aria-label="Navigasi utama">
             <a href="dashboard.html" class="nav-tab">Dashboard</a>
 
-            <a href="stok.html" class="nav-tab">Informasi</a>
+            <a href="stok.html" class="nav-tab">Informasi Bahan Ajar</a>
 
-            <a href="tracking.html" class="nav-tab">Tracking</a>
+            <a href="tracking.html" class="nav-tab">Tracking Pengiriman</a>
 
-            <a href="rekap.html" class="nav-tab">Rekap</a>
+            <div class="nav-dropdown">
+                <button type="button" class="nav-tab nav-dropdown-toggle" aria-expanded="false" aria-controls="laporanMenu">
+                    Laporan <span class="nav-caret" aria-hidden="true">&#9662;</span>
+                </button>
 
-            <a href="histori.html" class="nav-tab">Histori</a>
+                <div id="laporanMenu" class="nav-dropdown-menu">
+                    <a href="monitoring.html" class="nav-dropdown-item">Monitoring Progress DO Bahan Ajar</a>
+                    <a href="rekap.html" class="nav-dropdown-item">Rekap Bahan Ajar</a>
+                </div>
+            </div>
+
+            <a href="histori.html" class="nav-tab">Histori Transaksi Bahan Ajar</a>
         </nav>
 
         <button type="button" class="theme-toggle" role="switch" aria-checked="false" aria-label="Ganti ke mode gelap">
