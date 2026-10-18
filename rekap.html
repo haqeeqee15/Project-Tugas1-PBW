@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rekap Bahan Ajar | SITTA Praktik</title>
     <link rel="stylesheet" href="css/style.css">
+    <script src="js/theme.js"></script>
     <script src="js/data.js" defer></script>
     <script src="js/navbar.js" defer></script>
     <script src="js/rekap.js" defer></script>
@@ -20,27 +21,28 @@
             <span class="brand-subtitle">Universitas Terbuka</span>
         </div>
 
-        <nav class="app-navbar-nav" aria-label="Navigasi utama">
+        <button type="button" class="nav-toggle" aria-label="Buka menu navigasi" aria-expanded="false" aria-controls="mainNav">
+            <span class="nav-toggle-bar"></span>
+            <span class="nav-toggle-bar"></span>
+            <span class="nav-toggle-bar"></span>
+        </button>
+
+        <nav id="mainNav" class="app-navbar-nav" aria-label="Navigasi utama">
             <a href="dashboard.html" class="nav-tab">Dashboard</a>
 
-            <a href="stok.html" class="nav-tab">Informasi Bahan Ajar</a>
+            <a href="stok.html" class="nav-tab">Informasi</a>
 
-            <a href="tracking.html" class="nav-tab">Tracking Pengiriman</a>
+            <a href="tracking.html" class="nav-tab">Tracking</a>
 
-            <details class="nav-dropdown">
-                <summary class="nav-tab">Laporan</summary>
-                <div class="dropdown-menu">
-                    <a href="monitoring.html" class="dropdown-link">
-                        Monitoring Progress DO Bahan Ajar
-                    </a>
-                    <a href="rekap.html" class="dropdown-link">
-                        Rekap Bahan Ajar
-                    </a>
-                </div>
-            </details>
+            <a href="rekap.html" class="nav-tab">Rekap</a>
 
-            <a href="histori.html" class="nav-tab">Histori Transaksi Bahan Ajar</a>
+            <a href="histori.html" class="nav-tab">Histori</a>
         </nav>
+
+        <button type="button" class="theme-toggle" role="switch" aria-checked="false" aria-label="Ganti ke mode gelap">
+            <span class="theme-switch" aria-hidden="true"><span class="theme-switch-thumb"></span></span>
+            <span class="theme-icon" aria-hidden="true"></span>
+        </button>
 
         <button type="button" id="logoutBtn" class="logout-btn">Logout</button>
     </header>

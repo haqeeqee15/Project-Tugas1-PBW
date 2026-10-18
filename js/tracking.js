@@ -178,6 +178,130 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
+    // =====================================================
+    // RINGKASAN DAN DAFTAR DO (dulu halaman Monitoring)
+    // =====================================================
+
+    const daftarDO = Object.values(dataTracking);
+    const tableBody = document.getElementById("monitoringTableBody");
+    const monitoringCount = document.getElementById("monitoringCount");
+    const searchInput = document.getElementById("searchDO");
+
+    function buatSel(nilai) {
+        const cell = document.createElement("td");
+        cell.textContent = nilai ?? "-";
+        return cell;
+    }
+
+    function buatStatus(status) {
+        const cell = document.createElement("td");
+        const badge = document.createElement("span");
+
+        badge.className = "status-badge";
+        badge.textContent = status || "Tidak diketahui";
+
+        if (status === "Dalam Perjalanan") {
+            badge.classList.add("status-transit");
+        } else if (status === "Dikirim") {
+            badge.classList.add("status-delivered");
+        }
+
+        cell.appendChild(badge);
+        return cell;
+    }
+
+    // Tombol detail langsung menampilkan detail di halaman ini.
+    function buatTombolDetail(nomorDO) {
+        const cell = document.createElement("td");
+        const button = document.createElement("button");
+
+        button.type = "button";
+        button.className = "btn-detail";
+        button.textContent = "Lihat Detail";
+        button.setAttribute("aria-label", `Lihat detail pengiriman ${nomorDO}`);
+
+        button.addEventListener("click", function () {
+            nomorDOInput.value = nomorDO;
+            cariPengiriman(nomorDO);
+        });
+
+        cell.appendChild(button);
+        return cell;
+    }
+
+    function tampilkanRingkasan() {
+        document.getElementById("totalDO").textContent = daftarDO.length;
+
+        document.getElementById("totalTransit").textContent = daftarDO.filter(
+            (item) => item.status === "Dalam Perjalanan"
+        ).length;
+
+        document.getElementById("totalDikirim").textContent = daftarDO.filter(
+            (item) => item.status === "Dikirim"
+        ).length;
+    }
+
+    function tampilkanTabel(kataKunci = "") {
+        tableBody.replaceChildren();
+
+        const keyword = kataKunci.trim().toLowerCase();
+
+        const hasilFilter = daftarDO.filter(function (item) {
+            const nomor = String(item.nomorDO || "").toLowerCase();
+            const nama = String(item.nama || "").toLowerCase();
+
+            return nomor.includes(keyword) || nama.includes(keyword);
+        });
+
+        monitoringCount.textContent =
+            `Menampilkan ${hasilFilter.length} dari ${daftarDO.length} data DO`;
+
+        if (hasilFilter.length === 0) {
+            const row = document.createElement("tr");
+            const cell = document.createElement("td");
+
+            cell.colSpan = 7;
+            cell.className = "table-empty";
+            cell.textContent = "Data DO tidak ditemukan.";
+
+            row.appendChild(cell);
+            tableBody.appendChild(row);
+            return;
+        }
+
+        hasilFilter.forEach(function (item, index) {
+            const row = document.createElement("tr");
+
+            row.appendChild(buatSel(index + 1));
+            row.appendChild(buatSel(item.nomorDO));
+            row.appendChild(buatSel(item.nama));
+            row.appendChild(buatSel(item.ekspedisi));
+            row.appendChild(buatSel(formatTanggal(item.tanggalKirim)));
+            row.appendChild(buatStatus(item.status));
+            row.appendChild(buatTombolDetail(item.nomorDO));
+
+            tableBody.appendChild(row);
+        });
+    }
+
+    document.getElementById("monitoringSearchForm").addEventListener("submit", function (event) {
+        event.preventDefault();
+        tampilkanTabel(searchInput.value);
+    });
+
+    document.getElementById("resetSearch").addEventListener("click", function () {
+        searchInput.value = "";
+        tampilkanTabel();
+        searchInput.focus();
+    });
+
+    searchInput.addEventListener("input", function () {
+        tampilkanTabel(searchInput.value);
+    });
+
+    tampilkanRingkasan();
+    tampilkanTabel();
+
     // Buka hasil secara otomatis dari parameter URL.
     const params = new URLSearchParams(window.location.search);
     const nomorDODariURL = params.get("do");

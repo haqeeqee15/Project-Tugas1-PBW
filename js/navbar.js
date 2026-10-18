@@ -2,7 +2,7 @@
  * =========================================================
  * SITTA PRAKTIK
  * File: js/navbar.js
- * Fungsi: Menandai tab aktif dan mengatur dropdown Laporan
+ * Fungsi: Menandai tab aktif dan mengatur menu burger di ponsel
  * =========================================================
  */
 
@@ -25,36 +25,49 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (aktif) {
             link.setAttribute("aria-current", "page");
-
-            // Jika halaman aktif ada di submenu, tandai juga tab "Laporan".
-            const dropdown = link.closest(".nav-dropdown");
-
-            if (dropdown) {
-                dropdown.querySelector("summary").classList.add("active");
-            }
         } else {
             link.removeAttribute("aria-current");
         }
     });
 
     // =====================================================
-    // 2. TUTUP DROPDOWN SAAT KLIK DI LUAR ATAU TEKAN ESCAPE
+    // 2. MENU BURGER UNTUK UKURAN PONSEL
     // =====================================================
 
-    const dropdown = navbar.querySelector(".nav-dropdown");
+    const toggle = navbar.querySelector(".nav-toggle");
 
-    if (!dropdown) return;
+    if (!toggle) return;
 
+    function aturMenu(buka) {
+        navbar.classList.toggle("nav-open", buka);
+        toggle.setAttribute("aria-expanded", String(buka));
+        toggle.setAttribute(
+            "aria-label",
+            buka ? "Tutup menu navigasi" : "Buka menu navigasi"
+        );
+    }
+
+    toggle.addEventListener("click", function () {
+        aturMenu(!navbar.classList.contains("nav-open"));
+    });
+
+    // Tutup menu saat klik di luar navbar.
     document.addEventListener("click", function (event) {
-        if (dropdown.open && !dropdown.contains(event.target)) {
-            dropdown.open = false;
+        if (navbar.classList.contains("nav-open") && !navbar.contains(event.target)) {
+            aturMenu(false);
         }
     });
 
+    // Tutup menu dengan tombol Escape.
     document.addEventListener("keydown", function (event) {
-        if (event.key === "Escape" && dropdown.open) {
-            dropdown.open = false;
-            dropdown.querySelector("summary").focus();
+        if (event.key === "Escape" && navbar.classList.contains("nav-open")) {
+            aturMenu(false);
+            toggle.focus();
         }
+    });
+
+    // Reset menu saat layar kembali ke ukuran desktop.
+    window.matchMedia("(min-width: 769px)").addEventListener("change", function (event) {
+        if (event.matches) aturMenu(false);
     });
 });
